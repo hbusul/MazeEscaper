@@ -1,0 +1,104 @@
+class PlayHelper {
+	/*
+		Draws instructions of playing to the left up of the screen
+	*/
+	function void drawPlayHelper(){
+		var int screenBase, increment;
+		let screenBase = 16384 + (4 * 352);
+		let increment = 352;
+
+		do Output.moveCursor(2, 1);
+		do Output.printString("  KEYS");
+
+		do PlayHelper.drawUpArrow(screenBase);
+		do Output.moveCursor(4, 1);
+		do Output.printString("  UP");
+
+		let screenBase = screenBase + (2*increment);
+		do PlayHelper.drawDownArrow(screenBase);
+		do Output.moveCursor(6, 1);
+		do Output.printString("  DOWN");
+
+		let screenBase = screenBase + (2*increment);
+		do PlayHelper.drawLeftArrow(screenBase);
+		do Output.moveCursor(8, 1);
+		do Output.printString("  LEFT");
+
+		let screenBase = screenBase + (2*increment);
+		do PlayHelper.drawRightArrow(screenBase);
+		do Output.moveCursor(10, 1);
+		do Output.printString("  RIGHT");
+
+		do Output.moveCursor(21, 0);
+		do Output.printString("hbusul");
+
+		do Output.moveCursor(22, 0);
+		do Output.printString("@GITHUB");
+
+		do Output.moveCursor(20, 25);
+		do Output.printString("Press a random key to start");
+		
+		do PlayHelper.drawRightLine();
+		return;
+	}
+
+	function void drawUpArrow(int base) {
+		do Memory.poke(base+32, 60);
+		do Memory.poke(base+64, 126);
+		do Memory.poke(base+96, 255);
+		do Memory.poke(base+128, 60);
+		do Memory.poke(base+160, 60);
+		do Memory.poke(base+192, 60);
+		do Memory.poke(base+224, 60);
+		do Memory.poke(base+256, 60);
+		do Memory.poke(base+288, 60);
+		do Memory.poke(base+320, 60);
+		return;
+	}
+
+	function void drawDownArrow(int base) {
+		do Memory.poke(base+32, 60);
+		do Memory.poke(base+64, 60);
+		do Memory.poke(base+96, 60);
+		do Memory.poke(base+128, 60);
+		do Memory.poke(base+160, 60);
+		do Memory.poke(base+192, 60);
+		do Memory.poke(base+224, 255);
+		do Memory.poke(base+256, 126);
+		do Memory.poke(base+288, 60);
+		do Memory.poke(base+320, 24);
+		return;
+	}
+
+	function void drawRightArrow(int base) {
+		do Memory.poke(base+64, 32);
+		do Memory.poke(base+96, 127);
+		do Memory.poke(base+128, 255);
+		do Memory.poke(base+160, 255);
+		do Memory.poke(base+192, 127);
+		do Memory.poke(base+224, 32);
+		return;
+	}
+
+	function void drawLeftArrow(int base) {
+		do Memory.poke(base+64, 4);
+		do Memory.poke(base+96, 254);
+		do Memory.poke(base+128, 255);
+		do Memory.poke(base+160, 255);
+		do Memory.poke(base+192, 254);
+		do Memory.poke(base+224, 4);
+		return;
+	}
+
+	function void drawRightLine() {
+		var int lineIndex, position;
+		let lineIndex = 0;
+		let position = 16384 + 5;
+		while(lineIndex < 256) {
+			do Memory.poke(position, -32767);
+			let position = position + 32;
+			let lineIndex = lineIndex + 1;
+		}
+		return;
+	}
+}

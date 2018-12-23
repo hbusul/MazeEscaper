@@ -1,0 +1,288 @@
+function PlayerController.new 2
+push constant 9
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 4
+pop this 2
+push argument 5
+pop this 3
+push argument 6
+pop this 4
+push argument 7
+pop this 5
+push argument 8
+pop this 6
+push argument 2
+pop this 7
+push argument 3
+pop this 8
+push this 0
+call Player.getX 1
+pop local 0
+push this 0
+call Player.getY 1
+pop local 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 7
+push local 0
+push this 2
+call Math.multiply 2
+add
+push this 6
+add
+push this 8
+push local 1
+push this 3
+call Math.multiply 2
+add
+push this 6
+add
+push this 7
+push local 0
+push constant 1
+add
+push this 2
+call Math.multiply 2
+add
+push this 6
+sub
+push this 8
+push local 1
+push constant 1
+add
+push this 3
+call Math.multiply 2
+add
+push this 6
+sub
+call Screen.drawRectangle 4
+pop temp 0
+push pointer 0
+return
+function PlayerController.loop 4
+push argument 0
+pop pointer 0
+push constant 0
+pop local 3
+push this 0
+call Player.getX 1
+pop local 1
+push this 0
+call Player.getY 1
+pop local 2
+label WHILE_EXP0
+push local 1
+push this 4
+push constant 1
+sub
+eq
+not
+push local 2
+push constant 0
+eq
+not
+or
+push constant 0
+not
+eq
+not
+if-goto WHILE_END0
+label WHILE_EXP1
+push local 3
+push constant 130
+lt
+push local 3
+push constant 133
+gt
+or
+not
+if-goto WHILE_END1
+call Keyboard.keyPressed 0
+pop local 3
+goto WHILE_EXP1
+label WHILE_END1
+push local 3
+push constant 130
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 8
+pop local 0
+label IF_FALSE0
+push local 3
+push constant 131
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 1
+pop local 0
+label IF_FALSE1
+push local 3
+push constant 132
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 4
+pop local 0
+label IF_FALSE2
+push local 3
+push constant 133
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 2
+pop local 0
+label IF_FALSE3
+push pointer 0
+push local 0
+call PlayerController.canPlayerGo 2
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push this 0
+call Player.getX 1
+pop local 1
+push this 0
+call Player.getY 1
+pop local 2
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 7
+push local 1
+push this 2
+call Math.multiply 2
+add
+push this 6
+add
+push this 8
+push local 2
+push this 3
+call Math.multiply 2
+add
+push this 6
+add
+push this 7
+push local 1
+push constant 1
+add
+push this 2
+call Math.multiply 2
+add
+push this 6
+sub
+push this 8
+push local 2
+push constant 1
+add
+push this 3
+call Math.multiply 2
+add
+push this 6
+sub
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push local 0
+call Player.go 2
+pop temp 0
+push this 0
+call Player.getX 1
+pop local 1
+push this 0
+call Player.getY 1
+pop local 2
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 7
+push local 1
+push this 2
+call Math.multiply 2
+add
+push this 6
+add
+push this 8
+push local 2
+push this 3
+call Math.multiply 2
+add
+push this 6
+add
+push this 7
+push local 1
+push constant 1
+add
+push this 2
+call Math.multiply 2
+add
+push this 6
+sub
+push this 8
+push local 2
+push constant 1
+add
+push this 3
+call Math.multiply 2
+add
+push this 6
+sub
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE4
+push constant 0
+pop local 3
+push constant 200
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function PlayerController.canPlayerGo 4
+push argument 0
+pop pointer 0
+push this 0
+call Player.getX 1
+pop local 0
+push this 0
+call Player.getY 1
+pop local 1
+push local 1
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 3
+push local 0
+push local 3
+add
+pop pointer 1
+push that 0
+pop local 2
+push local 2
+push argument 1
+and
+push argument 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+return
+label IF_FALSE0
+push constant 0
+return

@@ -1,0 +1,70 @@
+class MazeGenerator {
+	
+	function void generate(Array grid, PseudoRand rng, int mazeWidth, int mazeHeight) {
+		do MazeGenerator.carvePassageFrom(0, 0, grid, rng, mazeWidth, mazeHeight);
+		return;
+	}
+
+
+	function void carvePassageFrom(int cx, int cy, Array grid, PseudoRand rng, int mazeWidth, int mazeHeight) {
+		var int nextRand, temp, direction, opposite, nx, ny, taken, pw;
+		var Array tempArr;
+		let taken = 0;
+	
+		//let N = 1  north
+		//let S = 2  south
+		//let E = 4  east
+		//let W = 8  west
+
+		let temp = 0;
+		while(temp < 4){
+			let nextRand = rng.next(4);
+			let pw = ExtendedMath.pow(2, nextRand);
+			while(taken & pw = pw){
+				let nextRand = nextRand + 1;
+				if((nextRand > 4 | nextRand = 4) = true){
+					let nextRand = nextRand - 4;
+				}
+				let pw = ExtendedMath.pow(2, nextRand);
+			}
+			let nx = cx;
+			let ny = cy;
+			let taken = taken | pw;
+
+			if(nextRand = 0){
+				let direction = 1;
+				let opposite = 2;
+				let ny = ny - 1;
+			}
+			if(nextRand = 1){
+				let direction = 2;
+				let opposite = 1;
+				let ny = ny + 1;
+			}
+			if(nextRand = 2){
+				let direction = 4;
+				let opposite = 8;
+				let nx = nx + 1;
+			}
+			if(nextRand = 3){
+				let direction = 8;
+				let opposite = 4;
+				let nx = nx - 1;
+			}
+	
+			if((ny > -1) & (ny < mazeHeight) & (nx > -1) & (nx < mazeWidth) = true){
+				let tempArr = grid[ny];
+				if(tempArr[nx] = 0){
+					let tempArr[nx] = tempArr[nx] | opposite;
+					let tempArr = grid[cy];
+					let tempArr[cx] = tempArr[cx] | direction;
+					do MazeGenerator.carvePassageFrom(nx, ny, grid, rng, mazeWidth, mazeHeight);
+				}
+			}
+			let temp = temp + 1;
+		}
+
+		return;
+	}
+
+}

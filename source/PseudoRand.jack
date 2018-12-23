@@ -1,0 +1,41 @@
+class PseudoRand {
+	/*
+	This is a Linear congruential generator
+	Xn+1 = 17Xn + 5  mod 31
+	*/
+
+	field int cur;
+
+	constructor PseudoRand def(int x){
+		let cur = x;
+		return this;
+	} 
+
+	method int next(int mod){
+		var int term;
+
+		let term = cur;
+		let term = (term * 17) + 5;
+		let term = modula(term, 31);
+		let cur = term;
+
+		while(term > mod) {
+			let term = term - mod;
+		}
+		return term;
+	}
+
+	method int modula(int number, int mod){
+		while(number > mod){
+			let number = number - mod;
+		}
+		if(number = mod){
+			let number = 0;
+		}
+		while(number < 0){
+			let number = number + mod;
+		}
+		return number;
+	}
+
+}

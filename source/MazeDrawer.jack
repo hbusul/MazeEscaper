@@ -1,0 +1,53 @@
+class MazeDrawer {
+
+	function void drawMaze(Array maze, int originX, int originY, int blockWidth, int blockHeight, int xCount, int yCount) {
+		var int y, x, val;
+		var Array tempArr;
+		let x = 0;
+		let y = 0;
+		let val = 0;
+		do Screen.setColor(true);
+		do Screen.drawRectangle(originX, originY, originX + (xCount * blockWidth), originY + (yCount * blockHeight));
+		do Screen.setColor(false);
+		do Screen.drawRectangle(originX + 1, originY + 1, originX + (xCount * blockWidth) - 1, originY + (yCount * blockHeight) - 1);
+
+		
+		while(y < yCount){
+			let tempArr = maze[y];
+			let x = 0;
+			while(x < xCount){
+				let val = tempArr[x];
+				if((val & 4) = 0){
+					do MazeDrawer.drawEastWall(x, y, originX, originY, blockWidth, blockHeight);
+				}
+
+				if((val & 2) = 0) {
+					do MazeDrawer.drawSouthWall(x, y, originX, originY, blockWidth, blockHeight);
+				}
+				
+				let x = x + 1;
+			}
+			let y = y + 1;
+		}
+
+		return;
+	}
+
+
+	function void drawEastWall(int x, int y, int originX, int originY, int bw, int bh) {
+		do Screen.setColor(true);
+		do Screen.drawLine(originX + bw + (bw * x), originY + (y * bh), originX + bw + (bw * x), originY + bh + (y * bh));
+		return;
+	}
+
+
+	function void drawSouthWall(int x, int y, int originX, int originY, int bw, int bh) {
+		do Screen.setColor(true);
+		do Screen.drawLine(originX + (bw * x), originY + bh + (y * bh), originX + (bw * x) + bw,  originY + bh + (y * bh));
+		return;
+	}
+
+
+
+
+}

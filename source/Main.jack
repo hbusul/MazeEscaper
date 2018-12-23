@@ -1,0 +1,84 @@
+class Main {
+	function void main() {
+		var int startRand, temp, temp2, mazeWidth, mazeHeight, xOrigin, yOrigin, bw, bh, padding;
+        var PseudoRand rng;
+        var Array maze, tempArr;
+       	var Player player;
+       	var PlayerController controller;
+       	//maze width indicates number of blocks right to left
+       	//maze height indicates number of blocks top to bottom
+
+       	//Settings
+       	let mazeWidth = 16;
+       	let mazeHeight = 10;
+       	let xOrigin = 104;
+       	let yOrigin = 8;
+       	let bw = 24;
+       	let bh = 24;
+       	let padding = 6;
+
+   
+		do PlayHelper.drawPlayHelper();
+		let startRand = Main.getFirstKeyPressed();
+		let rng = PseudoRand.def(startRand); //user input is the seed
+		
+		do Screen.setColor(false);
+		do Screen.drawRectangle(96, 0, 511, 255);
+
+		let maze = Array.new(mazeHeight); //array of arrays
+		let temp = 0;
+		while(temp < mazeHeight){
+			let maze[temp] = Array.new(mazeWidth);
+			let temp2 = 0;
+			while(temp2 < mazeWidth){
+				let tempArr = maze[temp];
+				let tempArr[temp2] = 0;
+				let temp2 = temp2 + 1;
+			}
+			let temp = temp + 1;
+		}
+
+
+		do MazeGenerator.generate(maze, rng, mazeWidth, mazeHeight);
+		//Array maze, int originX, int originY, int blockWidth, int blockHeight, int xCount, int yCount
+		do MazeDrawer.drawMaze(maze, xOrigin, yOrigin, bw, bh, mazeWidth, mazeHeight);
+
+		let player = Player.new(0, 0); //starting point is top left
+
+		let controller = PlayerController.new(player, maze, xOrigin, yOrigin,
+		 bw, bh, mazeWidth, mazeHeight, padding);
+
+		do Main.drawEndPoint(xOrigin, yOrigin, bw, bh, mazeWidth, mazeHeight, 8);
+		
+
+		do controller.loop();
+
+		do Screen.setColor(false);
+		do Screen.drawRectangle(0, 0, 511, 255);
+
+		do Screen.setColor(true);
+		do Output.moveCursor(11, 28);
+		do Output.printString("YOU WON!");
+
+
+
+		return;
+	}
+
+	function void drawEndPoint(int baseX, int baseY, int bw, int bh, int xc, int yc, int rad){
+		do Screen.setColor(true);
+		do Screen.drawCircle(baseX + ((xc - 1) * bw) + (bw / 2),
+			baseY + (bh / 2), rad);
+		return;
+	}
+
+	function int getFirstKeyPressed(){
+		var char key;
+		let key = 0;
+		while(key = 0){
+			let key = Keyboard.keyPressed();
+		}
+		return key;
+	}
+
+}

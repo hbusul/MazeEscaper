@@ -1,0 +1,78 @@
+function PseudoRand.def 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push pointer 0
+return
+function PseudoRand.next 1
+push argument 0
+pop pointer 0
+push this 0
+pop local 0
+push local 0
+push constant 17
+call Math.multiply 2
+push constant 5
+add
+pop local 0
+push pointer 0
+push local 0
+push constant 31
+call PseudoRand.modula 3
+pop local 0
+push local 0
+pop this 0
+label WHILE_EXP0
+push local 0
+push argument 1
+gt
+not
+if-goto WHILE_END0
+push local 0
+push argument 1
+sub
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+return
+function PseudoRand.modula 0
+push argument 0
+pop pointer 0
+label WHILE_EXP0
+push argument 1
+push argument 2
+gt
+not
+if-goto WHILE_END0
+push argument 1
+push argument 2
+sub
+pop argument 1
+goto WHILE_EXP0
+label WHILE_END0
+push argument 1
+push argument 2
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop argument 1
+label IF_FALSE0
+label WHILE_EXP1
+push argument 1
+push constant 0
+lt
+not
+if-goto WHILE_END1
+push argument 1
+push argument 2
+add
+pop argument 1
+goto WHILE_EXP1
+label WHILE_END1
+push argument 1
+return

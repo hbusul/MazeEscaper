@@ -1,0 +1,40 @@
+class Player{
+	field int x;
+	field int y;
+
+	constructor Player new(int xVal, int yVal){
+		let x = xVal;
+		let y = yVal;
+		return this;
+	}
+
+	method int getX(){
+		return x;
+	}
+
+	method int getY(){
+		return y;
+	}
+	//let N = 1  north
+	//let S = 2  south
+	//let E = 4  east
+	//let W = 8  west
+
+	method void go(int direction){
+
+		if(direction = 8){
+			let x = x - 1;
+		}
+		if(direction = 1){
+			let y =  y - 1;
+		}
+		if(direction = 4){
+			let x = x + 1;
+		}
+		if(direction = 2){
+			let y = y + 1;
+		}
+		return;
+	}
+
+}
